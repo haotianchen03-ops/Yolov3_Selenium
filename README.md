@@ -1,6 +1,6 @@
 # Slide CAPTCHA Recognition with Deep Learning
 
-This project uses a YOLOv3-based deep learning model to detect the gap position in slide CAPTCHA images. It is modified based on:[https://github.com/eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3)
+This project uses a YOLOv3-based deep learning model to detect the gap position in slide CAPTCHA images. It is modified based on : [https://github.com/eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3)
 
 With only a few hundred labeled gap images, you can train a high-accuracy detection model.
 Example result:
