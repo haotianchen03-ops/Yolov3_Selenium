@@ -113,12 +113,3 @@ Saving images:
 ![](data/captcha/result/captcha_435.png)
 
 ![](data/captcha/result/captcha_354.png)
-
-## 协议
-
-本项目基于开源 [GNU 协议](https://github.com/eriklindernoren/PyTorch-YOLOv3/blob/master/LICENSE)
-，另外本项目不提供任何有关滑动轨迹相关模拟和 JavaScript 逆向分析方案。
-
-本项目仅供学习交流使用，请勿用于非法用途，本人不承担任何法律责任。
-
-如有侵权请联系个人删除，谢谢。
