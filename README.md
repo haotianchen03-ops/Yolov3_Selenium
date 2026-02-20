@@ -1,77 +1,79 @@
-# 滑动验证码深度学习识别
+# Slide CAPTCHA Recognition with Deep Learning
 
-本项目使用深度学习 YOLOV3 模型来识别滑动验证码缺口，基于 [https://github.com/eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3) 修改。
+This project uses a YOLOv3-based deep learning model to detect the gap position in slide CAPTCHA images. It is modified based on:[https://github.com/eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3)
 
-只需要几百张缺口标注图片即可训练出精度高的识别模型，识别效果样例：
+With only a few hundred labeled gap images, you can train a high-accuracy detection model.
+Example result:
 
 ![](data/captcha/result/captcha_435.png)
-## 克隆项目
+## Clone the Project
 
-运行命令：
+Run：
 
 ```
 git clone https://github.com/Python3WebSpider/DeepLearningSlideCaptcha.git
 ```
 
-## 数据准备
+## Data Preparation
 
-使用 LabelImg 工具标注自行标注一批数据，大约 200 张以上即可训练出不错的效果。
+Use the LabelImg tool to annotate your own dataset. Around 200+ labeled images are usually sufficient to achieve good performance.
 
 LabelImg：[https://github.com/tzutalin/labelImg](https://github.com/tzutalin/labelImg)
 
-标注要求：
+Annotation Requirements：
 
-* 圈出验证码目标滑块区域的完整完整矩形，无需标注源滑块。
-* 目标矩形命名为 target 这个类别。
-* 建议使用 LabelImg 的快捷键提高标注效率。
+* Draw a complete bounding box around the target gap region of the CAPTCHA.
+* No need to annotate the original sliding block.
+* The class name must be target.
+* It is recommended to use LabelImg keyboard shortcuts to improve labeling efficiency.
 
-## 环境准备
+## Environment Setup
 
-建议在 GPU 环境和虚拟 Python 环境下执行如下命令：
+It is recommended to use a GPU environment and a virtual Python environment.
+
+Install dependencies:
 
 ```
 pip3 install -r requirements.txt
 ```
 
-## 预训练模型下载
+## Download Pretrained Model
 
-YOLOV3 的训练要加载预训练模型才能有不错的训练效果，预训练模型下载：
+YOLOv3 requires pretrained weights to achieve good training performance.
 
+Download pretrained weights:
 ```
 bash prepare.sh
 ```
 
-下载完成之后会在 weights 文件夹下出现模型权重文件，供训练使用。
+After downloading, the weight files will appear in the weights directory.
+## Training
 
-## 训练
+A labeled dataset is already provided under: data/captcha. You can directly use it for training.
 
-本项目已经提供了标注好的数据集，在 data/captcha，可以直接使用。
+If you want to train on your own dataset, please refer to: [https://github.com/eriklindernoren/PyTorch-YOLOv3#train-on-custom-dataset](https://github.com/eriklindernoren/PyTorch-YOLOv3#train-on-custom-dataset)。
 
-如果要训练自己的数据，数据格式准备见：[https://github.com/eriklindernoren/PyTorch-YOLOv3#train-on-custom-dataset](https://github.com/eriklindernoren/PyTorch-YOLOv3#train-on-custom-dataset)。
-
-当前数据训练脚本：
+Run the training script:
 
 ```
 bash train.sh
 ```
 
-实测 P100 训练时长约 15 秒一个 epoch，大约几分钟即可训练出较好效果。
+## Testing
 
-## 测试
+After training, .pth model files will be generated in the checkpoints directory.
 
-训练完毕之后会在 checkpoints 文件夹生成 pth 文件，可直接使用模型来预测生成标注结果。
+You can use the trained model to perform prediction and generate detection results.
 
-此时 checkpoints 文件夹会生成训练好的 pth 文件。
-
-当前数据测试脚本：
+Run：
 
 ```
 sh detect.sh
 ```
 
-该脚本会读取 captcha 下的 test 文件夹所有图片，并将处理后的结果输出到 test 文件夹。
+This script reads all images in: data/captcha/test, and outputs processed images into the same test folder.
 
-运行结果样例：
+Example Output:
 
 ```
 Performing object detection:
@@ -106,7 +108,7 @@ Saving images:
         + Label: target, Conf: 0.99998
 ```
 
-样例结果：
+Sample Results:
 
 ![](data/captcha/result/captcha_288.png)
 
